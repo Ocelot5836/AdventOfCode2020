@@ -1,0 +1,22 @@
+io/github/ocelot/Day1.java
+ io.github.ocelot.Day1
+io/github/ocelot/IntRange.java
+ io.github.ocelot.IntRange
+io/github/ocelot/Day2.java
+ io.github.ocelot.Day2
+io/github/ocelot/Day3.java
+ io.github.ocelot.Day3
+io/github/ocelot/passport/PassportValidator.java
+ io.github.ocelot.passport.PassportValidator
+io/github/ocelot/Day4.java
+ io.github.ocelot.Day4
+io/github/ocelot/passport/RegexPassportValidator.java
+ io.github.ocelot.passport.RegexPassportValidator
+io/github/ocelot/passport/AndPassportValidator.java
+ io.github.ocelot.passport.AndPassportValidator
+io/github/ocelot/passport/SetPassportValidator.java
+ io.github.ocelot.passport.SetPassportValidator
+io/github/ocelot/passport/IntRangePassportValidator.java
+ io.github.ocelot.passport.IntRangePassportValidator
+io/github/ocelot/passport/PassportField.java
+ io.github.ocelot.passport.PassportField
