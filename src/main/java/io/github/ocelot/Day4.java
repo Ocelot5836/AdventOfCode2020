@@ -14,6 +14,9 @@ import java.util.stream.Stream;
 
 import static io.github.ocelot.passport.PassportValidator.*;
 
+/**
+ * @author Ocelot
+ */
 public class Day4
 {
     private static final List<PassportField> REQUIRED_FIELDS = Arrays.asList(
@@ -30,65 +33,74 @@ public class Day4
 
     public static void main(String[] args) throws IOException
     {
+        // Parse input data
         StringBuilder data = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Day4.class.getResourceAsStream("/4/input.txt"))))
         {
             while (reader.ready())
             {
                 String line = reader.readLine().trim();
+                // If the line is empty the end of a passport is assumed
                 if (line.isEmpty())
                 {
                     data.append(",");
                 }
                 else
                 {
+                    // Append lines together to unify it into a single line split by spaces
                     data.append(line).append(" ");
                 }
             }
         }
-
         String[] input = data.toString().split(",");
-        System.out.println(input.length);
 
+        // Process each line as a passport
         int passportCount = 0;
         for (String passport : input)
         {
             String[] fields = passport.split(" ");
+            // If there aren't enough fields to fill the required size, it must be impossible to be valid
             if (fields.length < REQUIRED_FIELDS.size())
                 continue;
 
+            // Store status in a single 8 bit number. There are 8 fields to it works out
             byte present = 0;
             fields:
             for (String field : fields)
             {
                 String[] pair = field.trim().split(":");
-                if (pair.length != 2)
+                if (pair.length != 2) // This should never be thrown
                     throw new IllegalArgumentException("Invalid pair '" + field + "'");
+
                 String key = pair[0];
                 for (int i = 0; i < FIELDS.size(); i++)
                 {
                     PassportField passportField = FIELDS.get(i);
-                    if (passportField.getName().equals(key))
+                    if (passportField.getName().equals(key)) // If key is found in fields, process it
                     {
-                        present |= (passportField.test(pair[1]) ? 1 : 0) << i;
+                        present |= (passportField.test(pair[1]) ? 1 : 0) << i; // Mark field as present if the test passed
                         continue fields;
                     }
                 }
+                // This should never be called
                 throw new IllegalArgumentException("Unknown key '" + key + "'");
             }
 
+            // Loop through all fields to check if a required field is missing it's flag
             boolean valid = true;
             for (int i = 0; i < REQUIRED_FIELDS.size(); i++)
             {
-                if (((present >> i) & 1) == 0)
+                if (((present >> i) & 1) == 0) // If the value is 0, the test from before failed and the passport is no longer valid
                 {
+                    // Mark as invalid and stop checking for validity
                     valid = false;
                     break;
                 }
             }
-            if (valid)
+            if (valid) // If valid is not false, all checks passed and the count is incremented
                 passportCount++;
         }
+        // Print result
         System.out.println("There are " + passportCount + " valid passports");
     }
 }

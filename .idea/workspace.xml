@@ -47,7 +47,7 @@
       <recent name="io.github.ocelot.passport" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Day4">
+  <component name="RunManager" selected="Application.Day3">
     <configuration name="Day1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.github.ocelot.Day1" />
       <module name="AdventOfCode2020.main" />
@@ -100,13 +100,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -129,6 +131,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607113548731</updated>
       <workItem from="1607113550392" duration="11519000" />
+      <workItem from="1607142661357" duration="1666000" />
     </task>
     <servers />
   </component>
