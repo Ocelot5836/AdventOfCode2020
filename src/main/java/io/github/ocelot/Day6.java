@@ -11,7 +11,10 @@ public class Day6
 {
     public static void main(String[] args) throws IOException
     {
+        TimeTracker tracker = new TimeTracker();
+
         // Parse input data
+        tracker.startSection("parse");
         StringBuilder data = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Day4.class.getResourceAsStream("/6/input.txt"))))
         {
@@ -33,6 +36,7 @@ public class Day6
         String[] input = data.toString().split(",");
 
         // Process each group of responses
+        tracker.endStartSection("process");
         long count = 0;
         for (String group : input)
         {
@@ -60,8 +64,10 @@ public class Day6
                 if (((flag >> i) & 1) == 1) // If the flag is set then it must have been set for all responses to increment the count accordingly
                     count++;
         }
+        tracker.endSection();
 
         // Print result
         System.out.println("Overall, " + count + " questions were answered yes.");
+        System.out.println(tracker);
     }
 }

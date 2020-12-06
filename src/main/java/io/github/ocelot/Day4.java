@@ -33,7 +33,10 @@ public class Day4
 
     public static void main(String[] args) throws IOException
     {
+        TimeTracker tracker = new TimeTracker();
+
         // Parse input data
+        tracker.startSection("parse");
         StringBuilder data = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Day4.class.getResourceAsStream("/4/input.txt"))))
         {
@@ -55,6 +58,7 @@ public class Day4
         String[] input = data.toString().split(",");
 
         // Process each line as a passport
+        tracker.endStartSection("process");
         int passportCount = 0;
         for (String passport : input)
         {
@@ -100,7 +104,10 @@ public class Day4
             if (valid) // If valid is not false, all checks passed and the count is incremented
                 passportCount++;
         }
+        tracker.endSection();
+
         // Print result
         System.out.println("There are " + passportCount + " valid passports");
+        System.out.println(tracker);
     }
 }

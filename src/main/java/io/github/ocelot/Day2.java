@@ -14,7 +14,10 @@ public class Day2
 
     public static void main(String[] args) throws IOException
     {
+        TimeTracker tracker = new TimeTracker();
+
         // Parse input data
+        tracker.startSection("parse");
         StringBuilder data = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Day2.class.getResourceAsStream("/2/input.txt"))))
         {
@@ -24,6 +27,7 @@ public class Day2
         String[] input = data.toString().split(",");
 
         // Process each line
+        tracker.endStartSection("process");
         int validPolicies = 0;
         passwords:
         for (String entry : input)
@@ -55,9 +59,11 @@ public class Day2
             // Increment valid policies since there was only 1 of the requested token in either position
             validPolicies++;
         }
+        tracker.endSection();
 
         // Print result
         System.out.println(validPolicies + " policies were valid out of " + input.length + ". (" + FORMAT.format((double) validPolicies / (double) input.length * 100.0) + "% valid)");
+        System.out.println(tracker);
     }
 
     /**

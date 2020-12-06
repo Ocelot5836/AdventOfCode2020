@@ -14,7 +14,10 @@ public class Day5
 {
     public static void main(String[] args) throws IOException
     {
+        TimeTracker tracker = new TimeTracker();
+
         // Parse input data
+        tracker.startSection("parse");
         StringBuilder data = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Day5.class.getResourceAsStream("/5/input.txt"))))
         {
@@ -24,6 +27,7 @@ public class Day5
         String[] input = Arrays.stream(data.toString().split(",")).toArray(String[]::new);
 
         // Process each line as a boarding pass
+        tracker.endStartSection("validate");
         int[] result = new int[input.length];
         for (int i = 0; i < input.length; i++)
         {
@@ -41,6 +45,7 @@ public class Day5
         Arrays.stream(result).max().ifPresent(max -> System.out.println("Highest seat id is " + max));
 
         // Create a set of all adjacent seat ids
+        tracker.endStartSection("process");
         Set<Integer> values = new HashSet<>();
         Arrays.stream(result).forEach(value ->
         {
@@ -49,9 +54,11 @@ public class Day5
         });
         // Remove all seat ids in the set
         values.removeIf(value -> Arrays.stream(result).anyMatch(s -> value == s));
+        tracker.endSection();
 
         // Print second result
         System.out.println("Missing seats are " + values);
+        System.out.println(tracker);
     }
 
     /**

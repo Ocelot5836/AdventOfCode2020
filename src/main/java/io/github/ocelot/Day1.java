@@ -12,7 +12,10 @@ public class Day1
 {
     public static void main(String[] args) throws IOException
     {
+        TimeTracker tracker = new TimeTracker();
+
         // Parse input data
+        tracker.startSection("parse");
         StringBuilder data = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Day1.class.getResourceAsStream("/1/input.txt"))))
         {
@@ -22,6 +25,7 @@ public class Day1
         int[] input = Arrays.stream(data.toString().split(",")).mapToInt(Integer::parseInt).toArray();
 
         // Process each line n^2 times
+        tracker.endStartSection("process");
         for (int i = 0; i < input.length * input.length; i++)
         {
             // Process each number value for each iteration
@@ -33,8 +37,11 @@ public class Day1
                 // Check if all three values add up to 2020
                 if (value + input[x] + input[y] == 2020)
                 {
+                    tracker.endSection();
+
                     // Print result
                     System.out.println(value * input[x] * input[y]);
+                    System.out.println(tracker);
                     return;
                 }
             }

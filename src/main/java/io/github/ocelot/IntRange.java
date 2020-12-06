@@ -1,6 +1,5 @@
 package io.github.ocelot;
 
-import java.util.Objects;
 import java.util.function.Predicate;
 
 /**
@@ -8,7 +7,7 @@ import java.util.function.Predicate;
  *
  * @author Ocelot
  */
-public class IntRange implements Predicate<Integer>
+public class IntRange implements Predicate<Double>
 {
     private final int min;
     private final int max;
@@ -36,39 +35,33 @@ public class IntRange implements Predicate<Integer>
     }
 
     @Override
-    public boolean test(Integer integer)
+    public boolean test(Double number)
     {
-        return integer >= this.min && integer <= this.max;
+        return number >= this.min && number <= this.max;
     }
 
-    public double getMedian()
-    {
-        return this.min + (this.max - this.min) / 2.0;
-    }
-
+    /**
+     * @return The minimum value a number in this range can be
+     */
     public int getMin()
     {
         return min;
     }
 
+    /**
+     * @return The maximum value a number in this range can be
+     */
     public int getMax()
     {
         return max;
     }
 
-    @Override
-    public boolean equals(Object o)
+    /**
+     * @return The center value of this range
+     */
+    public double getMedian()
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        IntRange intRange = (IntRange) o;
-        return min == intRange.min && max == intRange.max;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(min, max);
+        return this.min + (this.max - this.min) / 2.0;
     }
 
     @Override
