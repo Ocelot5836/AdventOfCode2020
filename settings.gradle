@@ -1,2 +1,4 @@
-rootProject.name = 'AdventOfCode2020'
+rootProject.name = 'AdventOfCode'
 
+include 'code-2020'
+include 'code-2022'

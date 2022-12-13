@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+}
+
+group 'io.github.ocelot'
+version '1.0'
+
+repositories {
+    mavenCentral()
+    maven { url "https://libraries.minecraft.net" }
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation(platform("org.lwjgl:lwjgl-bom:${project.lwjglVersion}"))
+    implementation group: "org.joml", name: "joml", version: project.jomlVersion
+
+    implementation "org.lwjgl:lwjgl"
+
+    def platforms = ['linux', 'macos', 'macos-arm64', 'windows']
+    for (def lwjglModule : ['glfw', 'opengl']) {
+        implementation "org.lwjgl:lwjgl-$lwjglModule"
+
+        for (def platform : platforms) {
+            implementation "org.lwjgl:lwjgl-$lwjglModule::natives-$platform"
+        }
+    }
+
+    for (def platform : platforms) {
+        implementation "org.lwjgl:lwjgl::natives-$platform"
+    }
+
+    compileOnly 'org.jetbrains:annotations:23.0.0'
+    implementation "com.mojang:logging:1.0.0"
+    implementation 'org.slf4j:slf4j-api:2.0.3'
+
+    runtimeOnly "net.minecrell:terminalconsoleappender:1.3.0"
+    runtimeOnly "org.apache.logging.log4j:log4j-slf4j2-impl:${project.log4jVersion}"
+    runtimeOnly "org.apache.logging.log4j:log4j-api:${project.log4jVersion}"
+    runtimeOnly "org.apache.logging.log4j:log4j-core:${project.log4jVersion}"
+
+    implementation 'com.github.Ocelot5836:glfw-windows:96e3de7'
+    implementation 'com.google.guava:guava:31.1-jre'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
