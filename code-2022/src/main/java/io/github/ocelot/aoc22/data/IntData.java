@@ -3,11 +3,11 @@ package io.github.ocelot.aoc22.data;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-public record FloatData(float... values) implements DayData
+public record IntData(int[] values) implements DayData
 {
-    public FloatData(int size)
+    public IntData(int size)
     {
-        this(new float[size]);
+        this(new int[size]);
     }
 
     @Override
@@ -19,18 +19,18 @@ public record FloatData(float... values) implements DayData
     @Override
     public void read(ByteBuffer buffer)
     {
-        buffer.asFloatBuffer().get(this.values);
+        buffer.asIntBuffer().get(this.values);
     }
 
     @Override
     public void write(ByteBuffer buffer)
     {
-        buffer.asFloatBuffer().put(this.values);
+        buffer.asIntBuffer().put(this.values);
     }
 
     @Override
     public int size()
     {
-        return this.values.length * Float.BYTES;
+        return this.values.length * Integer.BYTES;
     }
 }

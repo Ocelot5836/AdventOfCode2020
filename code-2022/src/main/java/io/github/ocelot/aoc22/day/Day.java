@@ -15,7 +15,7 @@ public abstract class Day
         this.logger = LogUtils.getLogger();
     }
 
-    public abstract void run(String input) throws Exception;
+    public abstract void run(String input, int part) throws Exception;
 
     public CompletableFuture<?> getDependencies(Executor mainExecutor, Executor backgroundExecutor)
     {
