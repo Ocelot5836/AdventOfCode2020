@@ -1,14 +1,18 @@
 #version 430 core
-#include errors.glsl
+
+#define NL 10
+
+uniform int in_Part;
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 
-layout(std430, binding = 0) buffer inBuffer {
-    int in_Part;
+layout(std430, binding = 0) buffer errorBuffer {
+    int[] out_Error;
+};
+layout(std430, binding = 1) buffer inBuffer {
     int[] in_Value;
 };
-layout(std430, binding = 1) buffer outBuffer {
-    int out_Error;
+layout(std430, binding = 2) buffer outBuffer {
     int out_Index;
 };
 

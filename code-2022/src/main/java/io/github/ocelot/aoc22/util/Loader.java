@@ -1,7 +1,6 @@
-package io.github.ocelot.aoc22;
+package io.github.ocelot.aoc22.util;
 
 import com.mojang.logging.LogUtils;
-import io.github.ocelot.aoc22.shader.ShaderError;
 import io.github.ocelot.aoc22.shader.ShaderProcessor;
 import io.github.ocelot.aoc22.shader.ShaderProgram;
 import org.slf4j.Logger;
@@ -126,8 +125,6 @@ public final class Loader
 
     public static CompletableFuture<String> loadInput(String name, Executor backgroundExecutor)
     {
-        if ("/include/errors.glsl".equals(name))
-            return CompletableFuture.completedFuture(ShaderError.CODE);
         return CompletableFuture.supplyAsync(() ->
         {
             try

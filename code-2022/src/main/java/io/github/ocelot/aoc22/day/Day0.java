@@ -2,7 +2,7 @@ package io.github.ocelot.aoc22.day;
 
 import io.github.ocelot.aoc22.data.FloatData;
 
-public class Day0 extends ComputeDay<FloatData, FloatData>
+public class Day0 extends ComputeDay<FloatData>
 {
     public Day0()
     {

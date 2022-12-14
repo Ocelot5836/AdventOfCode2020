@@ -1,2 +1,19 @@
-[21:09:08] [Main/INFO]: Got [16.0]
-[21:09:08] [Main/INFO]: Complete
+[19:24:35] [Main/INFO]: Loaded dependency: errors.glsl
+[19:24:35] [Main/ERROR]: Compute shader failed to compile with the following errors:
+ERROR: 0:35: error(#112) Too few args in Macro: printNumber
+ERROR: 0:35: error(#132) Syntax error: ";" parse error
+ERROR: error(#273) 2 compilation errors.  No code generated
+
+
+[19:24:35] [Main/ERROR]: Failed to run day 4
+java.util.concurrent.CompletionException: java.lang.IllegalStateException: Failed to compile shader
+	at io.github.ocelot.aoc22.util.Loader.lambda$loadShader$5(Loader.java:117) ~[main/:?]
+	at java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:646) ~[?:?]
+	at java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
+	at io.github.ocelot.aoc22.util.TaskExecutor.pollTask(TaskExecutor.java:73) ~[main/:?]
+	at io.github.ocelot.aoc22.util.TaskExecutor.flushTasks(TaskExecutor.java:59) ~[main/:?]
+	at io.github.ocelot.aoc22.Main.run(Main.java:148) ~[main/:?]
+	at io.github.ocelot.aoc22.Main.main(Main.java:176) ~[main/:?]
+Caused by: java.lang.IllegalStateException: Failed to compile shader
+	at io.github.ocelot.aoc22.util.Loader.lambda$loadShader$5(Loader.java:99) ~[main/:?]
+	... 6 more

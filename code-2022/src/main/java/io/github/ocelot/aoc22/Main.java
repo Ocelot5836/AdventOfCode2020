@@ -1,9 +1,11 @@
 package io.github.ocelot.aoc22;
 
-import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.logging.LogUtils;
 import io.github.ocelot.aoc22.day.*;
+import io.github.ocelot.aoc22.util.Loader;
+import io.github.ocelot.aoc22.util.Profiler;
+import io.github.ocelot.aoc22.util.TaskExecutor;
 import io.github.ocelot.window.Window;
 import io.github.ocelot.window.WindowManager;
 import org.lwjgl.opengl.GL;
@@ -28,7 +30,6 @@ public class Main extends TaskExecutor implements Runnable, NativeResource
     private final Map<Integer, Day> days;
 
     private final int day;
-    private final int part;
     private final ExecutorService backgroundLoader;
     private final WindowManager windowManager;
     private final Window window;
@@ -36,11 +37,10 @@ public class Main extends TaskExecutor implements Runnable, NativeResource
     private Thread mainThread;
     private volatile boolean running;
 
-    public Main(int day, int part)
+    public Main(int day)
     {
         super("Main");
         this.day = day;
-        this.part = part;
         this.backgroundLoader = Executors.newCachedThreadPool();
         this.windowManager = new WindowManager();
         this.window = this.windowManager.create(800, 600, false);
@@ -50,6 +50,7 @@ public class Main extends TaskExecutor implements Runnable, NativeResource
         builder.put(1, new Day1());
         builder.put(2, new Day2());
         builder.put(3, new Day3());
+        builder.put(4, new Day4());
         this.days = builder.build();
     }
 
@@ -110,10 +111,11 @@ public class Main extends TaskExecutor implements Runnable, NativeResource
                 {
                     try
                     {
-                        Stopwatch stopwatch = Stopwatch.createStarted();
-                        day.run(input.get(), this.part);
-                        stopwatch.stop();
-                        LOGGER.info("Took " + stopwatch + " to complete day " + this.day + " part " + (this.part + 1));
+                        Profiler profiler = new Profiler();
+                        day.run(input.get(), profiler);
+                        profiler.flush();
+                        LOGGER.info("Day " + this.day);
+                        profiler.print(LOGGER);
                     }
                     catch (Exception e)
                     {
@@ -125,7 +127,6 @@ public class Main extends TaskExecutor implements Runnable, NativeResource
                     }
                     finally
                     {
-                        LOGGER.info("Complete");
                         this.running = false;
                     }
                 }, this)
@@ -163,17 +164,12 @@ public class Main extends TaskExecutor implements Runnable, NativeResource
     public static void main(String[] args)
     {
         int day = 0;
-        int part = 0;
         if (args.length > 0)
         {
             day = Integer.parseInt(args[0]);
         }
-        if (args.length > 1)
-        {
-            part = Integer.parseInt(args[1]);
-        }
 
-        try (Main main = new Main(day, part))
+        try (Main main = new Main(day))
         {
             Thread.currentThread().setName("Main");
             main.start();

@@ -1,4 +1,4 @@
-package io.github.ocelot.aoc22;
+package io.github.ocelot.aoc22.util;
 
 import com.mojang.logging.LogUtils;
 import org.jetbrains.annotations.NotNull;

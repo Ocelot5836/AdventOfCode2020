@@ -1,5 +1,7 @@
 package io.github.ocelot.aoc22.shader;
 
+import io.github.ocelot.aoc22.data.StringData;
+
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,7 +29,11 @@ public class ShaderProcessor
                     }
 
                     String sequence = line.substring(start + 1, end);
-                    line = line.substring(0, start) + "int[](" + IntStream.concat(IntStream.of(sequence.length()), sequence.chars()).mapToObj(Integer::toString).collect(Collectors.joining(", ")) + ")" + line.substring(end + 1);
+                    if (sequence.length() > StringData.MAX_SIZE)
+                    {
+                        throw new IllegalStateException("Max string length is " + StringData.MAX_SIZE);
+                    }
+                    line = line.substring(0, start) + "int[](" + IntStream.concat(sequence.chars(), IntStream.of(0)).mapToObj(Integer::toString).collect(Collectors.joining(", ")) + ")" + line.substring(end + 1);
                 }
             }
 

@@ -5,7 +5,7 @@ import io.github.ocelot.aoc22.data.IntData;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-public class Day2 extends ComputeDay<IntData, IntData>
+public class Day2 extends ComputeDay<IntData>
 {
     public Day2()
     {
